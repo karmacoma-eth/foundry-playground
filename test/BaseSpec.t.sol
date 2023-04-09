@@ -63,6 +63,7 @@ abstract contract BaseSpec is BeepTestMixin, BoopTestMixin {
     Base base;
 
     function setUp() public virtual override(BeepTestMixin, BoopTestMixin) {
+        // doesn't know/care how to create a concrete implementation, delegates to the specific test
         base = create();
 
         BeepTestMixin.setUp();
@@ -75,6 +76,7 @@ abstract contract BaseSpec is BeepTestMixin, BoopTestMixin {
     }
 }
 
+// because it extends BaseSpec, Mooper will have to satisfy all the tests defined in BaseSpec
 contract MooperTest is BaseSpec {
     Mooper mooper;
 
@@ -83,15 +85,18 @@ contract MooperTest is BaseSpec {
         mooper = new Mooper();
     }
 
+    // defines how to create a concrete Mooper
     function create() public override returns(Base) {
         return new Mooper();
     }
 
+    // only cares about the specific mooping behavior
     function test_moop() public {
         assertEq(mooper.moop(), 0xc0ffee);
     }
 }
 
+// because it extends BaseSpec, Momper will have to satisfy all the tests defined in BaseSpec
 contract MomperTest is BaseSpec {
     Momper momper;
 
@@ -100,10 +105,12 @@ contract MomperTest is BaseSpec {
         momper = new Momper();
     }
 
+    // defines how to create a concrete Momper
     function create() public override returns(Base) {
         return new Momper();
     }
 
+    // only cares about the specific momping behavior
     function test_momp() public {
         assertEq(momper.momp(), 0xdead);
     }
