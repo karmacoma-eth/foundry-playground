@@ -72,7 +72,7 @@ abstract contract BaseSpec is BeepTestMixin, BoopTestMixin {
 
     // we expect all Base implementations to frob() correctly
     function test_frob() public {
-        assertEq(create().frob(), 42);
+        assertEq(base.frob(), 42);
     }
 }
 
@@ -115,3 +115,19 @@ contract MomperTest is BaseSpec {
         assertEq(momper.momp(), 0xdead);
     }
 }
+
+// forge test
+//
+// Running 4 tests for test/BaseSpec.t.sol:MooperTest
+// [PASS] test_beep() (gas: 5367)
+// [PASS] test_boop() (gas: 5411)
+// [PASS] test_frob() (gas: 5455)
+// [PASS] test_moop() (gas: 5421)
+// Test result: ok. 4 passed; 0 failed; finished in 471.99µs
+
+// Running 4 tests for test/BaseSpec.t.sol:MomperTest
+// [PASS] test_beep() (gas: 5367)
+// [PASS] test_boop() (gas: 5411)
+// [PASS] test_frob() (gas: 5455)
+// [PASS] test_momp() (gas: 5421)
+// Test result: ok. 4 passed; 0 failed; finished in 362.74µs
