@@ -1,2 +1,5 @@
 [profile.default]
 bytecode_hash="ipfs"
+
+[fuzz]
+runs = 10000000
